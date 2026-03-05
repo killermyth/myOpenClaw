@@ -9,8 +9,10 @@ const log = createSubsystemLogger('discord-handlers');
 const conversations = new Map<string, Conversation>();
 
 export function setupHandlers(client: Client, config: MyClawConfig): void {
+  log.info('Setting up Discord message handlers...');
+
   client.on('messageCreate', async (message: Message) => {
-    log.info(`Received message from ${message.author.tag}: ${message.content}`);
+    log.info(`Received message from ${message.author.tag} in #${message.channel.id}: ${message.content}`);
 
     if (message.author.bot) {
       log.info('Ignoring bot message');
